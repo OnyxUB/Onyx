@@ -5,4 +5,4 @@ RUN pip install -r requirements.txt
 RUN apt update && apt install ffmpeg libavcodec-dev libavutil-dev libavformat-dev libswscale-dev libavdevice-dev -y
 EXPOSE 8080
 RUN mkdir /data
-CMD ["python3", "-m", "friendly-telegram"]
+CMD ["python3", "-m", "onyx"]

@@ -1,4 +1,4 @@
-name: geektg
+name: onyx
 services:
   worker:
     public: true

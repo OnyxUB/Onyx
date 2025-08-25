@@ -1,7 +1,7 @@
-# GeekTG.inline Docs [beta]
+# onyx.inline Docs [beta]
 ## Документация будет пополняться
 ### Приготовлено @hikariatama с любовью и заботой :･ﾟ✧(ꈍᴗꈍ)✧･ﾟ:
-Начиная с обновления **GeekTG 3.0.0**, всем пользователям доступны возможности **inline**.
+Начиная с обновления **onyx 3.0.0**, всем пользователям доступны возможности **inline**.
 
 Для каждого модуля по умолчанию доступен атрибут `inline`. Все операции выполняются через него.
 
@@ -9,9 +9,9 @@
 Модули, использующие **любые** возможности этого режима должны содержать скопу (комментарий):
 `# scope: inline`
 Если вы **не обрабатываете возможность** использования модуля на классическом FTG (`if hasattr(self, 'inline')`), необходимо также указать скоп (не обрабатывается юзерботом, но помогает анализаторам модулей):
-`# scope: geektg_only`
-Если в модуле требуется **определенная** версия GeekTG, для этого тоже есть скоп (обрабатывается **только** на GeekTG 3.1.15+):
-`# scope: geektg_min 3.1.15`
+`# scope: onyx_only`
+Если в модуле требуется **определенная** версия onyx, для этого тоже есть скоп (обрабатывается **только** на onyx 3.1.15+):
+`# scope: onyx_min 3.1.15`
 
 ## Создание формы
 Для создания кнопок в сообщении, используй встроенный **менеджер форм**:
@@ -31,12 +31,12 @@ async def form(
 ### Пример:
 ```python
 await self.inline.form(
-    text="📊 Poll GeekTG vs. FTG\n🕶 GeekTG: No votes\n😔 FTG: No votes",
+    text="📊 Poll onyx vs. FTG\n🕶 onyx: No votes\n😔 FTG: No votes",
     message=message,
     reply_markup=[
         [
             {
-                "text": "GeekTG",
+                "text": "onyx",
                 "callback": self.vote,
                 "args": [False]
             }
@@ -97,7 +97,7 @@ await self.inline.form(
 > ⚠️ **При возникновении ошибки при создании формы, exception не поднимается!**
 
 ## Галерея
-Начиная с обновления 3.1.22 в GeekTG доступны inline-галереи. Вызвать ее очень просто:
+Начиная с обновления 3.1.22 в onyx доступны inline-галереи. Вызвать ее очень просто:
 
 ```python
 def generate_caption() -> str:
@@ -187,11 +187,11 @@ call.form  # optional: Contains info about form
 > ⚠️ **Эти атрибуты недоступны в обычном обработчике.** В этом случае нужно пользоваться средствами aiogram и редактировать сообщение вручную, используя `await self.inline._bot.edit_message_text`!
 
 ## Inline команды (@bot ...)
-Для обработки инлайн команд GeekTG использует обработчики, созданные по шаблону, наподобие командам.
+Для обработки инлайн команд onyx использует обработчики, созданные по шаблону, наподобие командам.
 ```python
-from ..inline import GeekInlineQuery
+from ..inline import onyxInlineQuery
 
-async def <name>_inline_handler(self, query: GeekInlineQuery) -> None:
+async def <name>_inline_handler(self, query: onyxInlineQuery) -> None:
     # Process request
 ```
 Внутри объекта query доступен атрибут args, который содержит в себе текст, указанный после команды (@bot <name> **some text here**)
@@ -206,9 +206,9 @@ await query.answer(
             id=rand(20),
             title="Show available inline commands",
             description=f"You have {len(_help.splitlines())} available command(-s)",
-            input_message_content=InputTextMessageContent(
-                f"<b>ℹ️ Available inline commands:</b>\n\n{_help}",
-                "HTML",
+            input_message_content=InputTextMessageContent(  # В aiogram 3 аргументы должны быть именованными
+                message_text=f"<b>ℹ️ Available inline commands:</b>\n\n{_help}",
+                parse_mode="HTML",
                 disable_web_page_preview=True,
             ),
             thumb_url="https://img.icons8.com/fluency/50/000000/info-squared.png",
@@ -224,5 +224,3 @@ await query.answer(
 from ..inline import rand
 ```
 Затем можно указывать rand(20) в значении атрибута id
-
-

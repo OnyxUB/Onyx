@@ -1,9 +1,9 @@
 *__pycache__
 *.pyc
-friendly-telegram/api_token.py
-friendly-telegram/FTG-Modules
-friendly-telegram/loaded_modules
-friendly-telegram*.session*
+onyx/api_token.py
+onyx/FTG-Modules
+onyx/loaded_modules
+onyx*.session*
 database-*.json
 *.swp
 .setup_complete

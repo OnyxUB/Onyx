@@ -16,11 +16,11 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#    Modded by GeekTG Team
+#    Modded by onyx Team
 
 if [ ! -n "$BASH" ]; then
 	echo "Non-bash shell detected, fixing..."
-	bash -c '. <('"$(command -v curl >/dev/null && echo 'curl -Ls' || echo 'wget -qO-')"' https://github.com/GeekTG/Friendly-Telegram/raw/master/install.sh) '"$*"
+	bash -c '. <('"$(command -v curl >/dev/null && echo 'curl -Ls' || echo 'wget -qO-')"' https://github.com/onyx/onyx/raw/master/install.sh) '"$*"
 	exit $?
 fi
 
@@ -111,14 +111,14 @@ if [ ! x"" = x"$DYNO" ] && ! command -v python >/dev/null; then
 	export PATH="/app/.heroku/python/bin:$PATH" # Prefer the bootstrapped python, incl. pip, over the system one.
 fi
 
-if [ -d "Friendly-Telegram/friendly-telegram" ]; then
-	cd Friendly-Telegram || {
+if [ -d "onyx/onyx" ]; then
+	cd onyx || {
 		endspin "Error: Install git package and re-run installer"
 		exit 6
 	}
 	DIR_CHANGED="yes"
 fi
-if [ -f ".setup_complete" ] || [ -d "friendly-telegram" -a ! x"" = x"$DYNO" ]; then
+if [ -f ".setup_complete" ] || [ -d "onyx" -a ! x"" = x"$DYNO" ]; then
 	# If ftg is already installed by this script, or its in Heroku and installed
 	PYVER=""
 	if echo "$OSTYPE" | grep -qE '^linux-gnu.*'; then
@@ -127,7 +127,7 @@ if [ -f ".setup_complete" ] || [ -d "friendly-telegram" -a ! x"" = x"$DYNO" ]; t
 	endspin "Existing installation detected"
 	clear
 	banner
-	"python$PYVER" -m friendly-telegram "$@"
+	"python$PYVER" -m onyx "$@"
 	exit $?
 elif [ "$DIR_CHANGED" = "yes" ]; then
 	cd ..
@@ -144,7 +144,7 @@ if echo "$OSTYPE" | grep -qE '^linux-gnu.*' && [ -f '/etc/debian_version' ]; the
 		if command -v sudo >/dev/null; then
 			endspin "Restarting as root..."
 			echo "Relaunching" >>ftg-install.log
-			sudo "$BASH" -c '. <('"$(command -v curl >/dev/null && echo 'curl -Ls' || echo 'wget -qO-')"' https://github.com/GeekTG/Friendly-Telegram/raw/master/install.sh) '"$*"
+			sudo "$BASH" -c '. <('"$(command -v curl >/dev/null && echo 'curl -Ls' || echo 'wget -qO-')"' https://github.com/onyx/onyx/raw/master/install.sh) '"$*"
 			exit $?
 		else
 			PKGMGR="true"
@@ -161,7 +161,7 @@ elif echo "$OSTYPE" | grep -qE '^linux-gnu.*' && [ -f '/etc/arch-release' ]; the
 		if command -v sudo >/dev/null; then
 			endspin "Restarting as root..."
 			echo "Relaunching" >>ftg-install.log
-			sudo "$BASH" -c '. <('"$(command -v curl >/dev/null && echo 'curl -Ls' || echo 'wget -qO-')"' https://github.com/GeekTG/Friendly-Telegram/raw/master/install.sh) '"$*"
+			sudo "$BASH" -c '. <('"$(command -v curl >/dev/null && echo 'curl -Ls' || echo 'wget -qO-')"' https://github.com/onyx/onyx/raw/master/install.sh) '"$*"
 			exit $?
 		else
 			PKGMGR="true"
@@ -179,7 +179,7 @@ elif echo "$OSTYPE" | grep -qE '^darwin.*'; then
 	PKGMGR="brew install"
 	PYVER="3"
 else
-	endspin "Unrecognised OS. Please follow https://ftg.geektg.ml/#installation"
+	endspin "Unrecognised OS. Please follow https://ftg.onyx.ml/#installation"
 	exit 1
 fi
 
@@ -212,13 +212,13 @@ if [ ! x"$SUDO_USER" = x"" ]; then
 fi
 
 # shellcheck disable=SC2086
-${SUDO_CMD}rm -rf Friendly-Telegram
+${SUDO_CMD}rm -rf onyx
 # shellcheck disable=SC2086
-runout ${SUDO_CMD}git clone https://github.com/GeekTG/Friendly-Telegram || {
+runout ${SUDO_CMD}git clone https://github.com/onyx/onyx || {
 	errorout "Clone failed."
 	exit 3
 }
-cd Friendly-Telegram || {
+cd onyx || {
 	endspin "Error: Install git package and re-run installer"
 	exit 7
 }
@@ -233,7 +233,7 @@ endspin "Installation successful. Launching setup interface..."
 rm -f ../ftg-install.log
 touch .setup_complete
 # shellcheck disable=SC2086,SC2015
-${SUDO_CMD}"python$PYVER" -m friendly-telegram "$@" || {
+${SUDO_CMD}"python$PYVER" -m onyx "$@" || {
 	echo "Python scripts failed"
 	exit 5
 }

@@ -2,7 +2,7 @@
 <a href="https://deepsource.io/gh/OnyxUB/Onyx/?ref=repository-badge"><img src="https://app.deepsource.com/gh/OnyxUB/Onyx.svg/?label=active+issues&show_trend=true&token=4mv6coanbbu4L96XXPQdyfGF"></img></a>
 <a href="https://deepsource.io/gh/Onyx/Onyx/?ref=repository-badge" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://app.deepsource.com/gh/OnyxUB/Onyx.svg/?label=code+coverage&show_trend=true&token=4mv6coanbbu4L96XXPQdyfGF"/></a>
 <hr>
-<h2><img src="https://raw.githubusercontent.com/OnyxUB/assets/main/download_17122524.gif" align="center" width="45"> Installation</h2>
+<h2><img src="https://raw.githubusercontent.com/OnyxUB/assets/main/installation.gif" align="center" width="45"> Installation</h2>
 <img src="https://github.com/onyx/assets/raw/master/onyx.gif"></img>
 <hr>
 <h2><img src="https://github.com/onyx/assets/raw/master/56-document-outline.gif" align="center" width="45">Changes</h2>
